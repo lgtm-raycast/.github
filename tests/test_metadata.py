@@ -21,9 +21,10 @@ def api_calls(monkeypatch: pytest.MonkeyPatch) -> list[dict[str, Any]]:
     """Record requests without live GitHub writes."""
     calls: list[dict[str, Any]] = []
 
-    def request(**kwargs: Any) -> None:
+    def request(**kwargs: Any) -> list[Any]:
         """Capture the API contract and return an empty response."""
         calls.append(kwargs)
+        return []
 
     monkeypatch.setattr(metadata, "api", request)
     return calls
@@ -84,6 +85,25 @@ def test_label_sync_preserves_custom_labels_and_updates_only_drift(monkeypatch: 
     assert_that(calls[1]["payload"]).is_equal_to(canonical[0])
     assert_that(calls[2]["method"]).is_equal_to("PATCH")
     assert_that(calls[2]["payload"]).is_equal_to(canonical[1])
+
+
+@pytest.mark.parametrize("uppercase", [False, True], ids=["lowercase-response", "uppercase-response"])
+def test_label_color_case_does_not_trigger_writes(monkeypatch: pytest.MonkeyPatch, uppercase: bool) -> None:
+    """Equivalent GitHub hex colors must be idempotent regardless of letter case."""
+    current = json.loads(metadata.CATALOG.read_text())
+    for label in current:
+        label["color"] = label["color"].upper() if uppercase else label["color"].lower()
+    calls: list[dict[str, Any]] = []
+
+    def request(**kwargs: Any) -> list[Any]:
+        """Return equivalent remote labels and record any unexpected mutation."""
+        calls.append(kwargs)
+        return [current]
+
+    monkeypatch.setattr(metadata, "api", request)
+    metadata.sync_labels(repository=REPO)
+    assert_that(calls).is_length(1)
+    assert_that(calls[0]["method"]).is_equal_to("GET")
 
 
 def test_reconciliation_reads_current_issue_not_event_state(monkeypatch: pytest.MonkeyPatch) -> None:

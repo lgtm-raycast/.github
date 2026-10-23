@@ -64,7 +64,10 @@ def sync_labels(repository: str) -> None:
         current = existing.get(label["name"])
         if current is None:
             api(method="POST", endpoint=f"repos/{repository}/labels", payload=label)
-        elif any((current.get(key) or "") != value for key, value in label.items()):
+        elif any(
+            (current.get(key) or "").lower() != value.lower() if key == "color" else (current.get(key) or "") != value
+            for key, value in label.items()
+        ):
             api(method="PATCH", endpoint=f"repos/{repository}/labels/{quote(label['name'], safe='')}", payload=label)
 
 

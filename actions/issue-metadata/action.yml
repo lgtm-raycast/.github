@@ -4,7 +4,7 @@ description: Synchronize shared labels and ensure additive owner assignment and 
 inputs:
   token:
     description: Caller-scoped token with issues write permission
-    required: true
+    required: false
     default: ${{ github.token }}
   issue-number:
     description: Issue to reconcile; zero skips an individual issue

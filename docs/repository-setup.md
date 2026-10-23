@@ -2,7 +2,7 @@
 
 Every maintained extension gets its own public repository named after the upstream extension. Use the private
 `lgtm-raycast-bot` App through `lgtm-ai` for agent creation, signed commits, pushes and GitHub mutations.
-Never use personal credentials when bot authentication fails. The local routing pilot is tracked in
+Never fall back to personal credentials. The local routing pilot is tracked in
 [lgtm-hq/agent-infra#31](https://github.com/lgtm-hq/agent-infra/pull/31); verify the installed version on each host.
 
 ## Community and provenance
