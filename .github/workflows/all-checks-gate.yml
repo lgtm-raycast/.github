@@ -1,0 +1,20 @@
+---
+name: All Checks Gate
+"on":
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  merge_group:
+permissions: {}
+concurrency:
+  group: all-checks-gate-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  gate:
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-all-checks-gate.yml@9ea778eb4e6b876d60b7b3d7d0d0aee5182717bb # v0.78.0
+    permissions:
+      actions: read
+      checks: read
+      contents: read
+      statuses: read
+    with:
+      runner-image: ubuntu-26.04

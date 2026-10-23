@@ -1,0 +1,21 @@
+---
+name: PR metadata
+# Only pinned metadata workflows run with this token; they execute no PR code.
+"on":
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+permissions: {}
+jobs:
+  label:
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-pr-labeler.yml@9ea778eb4e6b876d60b7b3d7d0d0aee5182717bb # v0.78.0
+    permissions:
+      contents: read
+      pull-requests: write
+  assign:
+    if: github.event.action == 'opened'
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-pr-auto-assign.yml@9ea778eb4e6b876d60b7b3d7d0d0aee5182717bb # v0.78.0
+    permissions:
+      contents: read
+      pull-requests: write
+    with:
+      runner-image: ubuntu-26.04
