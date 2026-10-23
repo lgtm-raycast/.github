@@ -1,0 +1,6 @@
+# Generated lint reports, environments and reusable-workflow tooling are not source.
+.lintro/
+.venv/
+.lgtm-ci-tooling/
+__pycache__/
+.pytest_cache/

@@ -1,0 +1,25 @@
+---
+enforce:
+  line_length: 120
+execution:
+  enabled_tools: []
+  exclude: [".venv/", ".lintro/", "__pycache__/"]
+  fail_fast: false
+defaults:
+  markdownlint:
+    MD013:
+      line_length: 120
+      code_blocks: false
+      tables: false
+  yamllint:
+    extends: default
+    rules:
+      truthy:
+        check-keys: true
+      line-length:
+        max: 120
+        allow-non-breakable-inline-mappings: true
+      comments:
+        min-spaces-from-content: 1
+ai:
+  enabled: false
