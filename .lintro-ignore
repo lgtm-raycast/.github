@@ -4,3 +4,4 @@
 .lgtm-ci-tooling/
 __pycache__/
 .pytest_cache/
+report.xml
