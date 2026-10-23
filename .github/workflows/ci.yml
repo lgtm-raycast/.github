@@ -1,0 +1,108 @@
+---
+name: CI
+"on":
+  push:
+    branches: [main]
+  pull_request:
+  merge_group:
+  workflow_dispatch:
+  workflow_call:
+permissions: {}
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+jobs:
+  quality:
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-quality-lint.yml@9ea778eb4e6b876d60b7b3d7d0d0aee5182717bb # v0.78.0
+    permissions:
+      contents: read
+      packages: read
+    with:
+      runner-image: ubuntu-26.04
+      job-name: Lintro quality
+      egress-policy: block
+      egress-preset: quality
+  tests:
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-test-python.yml@9ea778eb4e6b876d60b7b3d7d0d0aee5182717bb # v0.78.0
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: write
+    with:
+      runner-image: ubuntu-26.04
+      python-version: "3.14"
+      coverage: true
+      coverage-threshold: 90
+      upload-coverage: false
+      publish-test-summary: true
+      job-name: Shared metadata tests
+      egress-policy: block
+      egress-preset: pypi
+  publish-quality-summary:
+    needs: quality
+    if: >-
+      !cancelled() && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name ==
+      github.repository
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-publish-quality-summary.yml@9ea778eb4e6b876d60b7b3d7d0d0aee5182717bb # v0.78.0
+    permissions:
+      contents: read
+      pull-requests: write
+    with:
+      runner-image: ubuntu-26.04
+      exit-code: ${{ needs.quality.outputs.exit-code }}
+  security:
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-security-audit.yml@9ea778eb4e6b876d60b7b3d7d0d0aee5182717bb # v0.78.0
+    permissions:
+      contents: read
+      packages: read
+    with:
+      runner-image: ubuntu-26.04
+      job-name: Security audit
+  publish-security-summary:
+    needs: security
+    if: >-
+      !cancelled() && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name ==
+      github.repository
+    # The pinning validator requires the version beside this indivisible SHA reference.
+    # yamllint disable-line rule:line-length
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-publish-security-audit-comment.yml@9ea778eb4e6b876d60b7b3d7d0d0aee5182717bb # v0.78.0
+    permissions:
+      contents: read
+      pull-requests: write
+    with:
+      runner-image: ubuntu-26.04
+  pinning:
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-validate-action-pinning.yml@9ea778eb4e6b876d60b7b3d7d0d0aee5182717bb # v0.78.0
+    permissions:
+      contents: read
+    with:
+      runner-image: ubuntu-26.04
+  title:
+    if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-semantic-pr-title.yml@9ea778eb4e6b876d60b7b3d7d0d0aee5182717bb # v0.78.0
+    permissions:
+      contents: read
+      pull-requests: write
+  required:
+    name: Required CI
+    if: always()
+    needs: [quality, tests, security, pinning, title, publish-quality-summary, publish-security-summary]
+    runs-on: ubuntu-26.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout gate
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Require all validations
+        env:
+          QUALITY_RESULT: ${{ needs.quality.result }}
+          TESTS_RESULT: ${{ needs.tests.result }}
+          SECURITY_RESULT: ${{ needs.security.result }}
+          PINNING_RESULT: ${{ needs.pinning.result }}
+          QUALITY_SUMMARY_RESULT: ${{ needs.publish-quality-summary.result }}
+          SECURITY_SUMMARY_RESULT: ${{ needs.publish-security-summary.result }}
+          TITLE_RESULT: ${{ needs.title.result }}
+        run: bash scripts/ci/required.sh

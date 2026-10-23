@@ -1,0 +1,26 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "local>lgtm-hq/.github:renovate-config"
+  ],
+  "assignees": [
+    "TurboCoder13"
+  ],
+  "gitIgnoredAuthors": [
+    "lgtm-raycast-bot[bot]@users.noreply.github.com",
+    "346604014+lgtm-raycast-bot[bot]@users.noreply.github.com"
+  ],
+  "automerge": false,
+  "lockFileMaintenance": {
+    "automerge": false
+  },
+  "packageRules": [
+    {
+      "description": "Dependency updates require the full downstream review and all-green merge policy",
+      "matchPackageNames": [
+        "**"
+      ],
+      "automerge": false
+    }
+  ]
+}

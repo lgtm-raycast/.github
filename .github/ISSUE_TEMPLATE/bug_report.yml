@@ -1,0 +1,102 @@
+---
+name: Bug report
+description: Report a bug to help us improve
+labels: [bug, needs-triage]
+assignees: [TurboCoder13]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to report a bug.
+        Please fill out the fields below so we can diagnose and fix the issue
+        quickly.
+
+  - type: input
+    id: title
+    attributes:
+      label: Bug summary
+      description: A clear and concise description of what the bug is
+      placeholder: "Example: Extension search fails to show an installed cask"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Exact commands, inputs, and outputs that reproduce the issue
+      placeholder: |
+        1. Open the Brew extension and choose Search
+        2. Observe error in output
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What you expected to happen
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What actually happened instead
+    validations:
+      required: true
+
+  - type: input
+    id: env-os
+    attributes:
+      label: Operating system
+      placeholder: "macOS version"
+    validations:
+      required: true
+
+  - type: input
+    id: env-version
+    attributes:
+      label: Project and version
+      description: Which extension release or commit are you using?
+      placeholder: "Extension v0.1.0 or commit SHA"
+    validations:
+      required: true
+
+  - type: input
+    id: env-runtime
+    attributes:
+      label: Runtime version
+      description: Raycast, Homebrew, Bun and Node versions, as applicable
+      placeholder: "Raycast version / Homebrew version / Bun version"
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error output or logs
+      description: Paste any relevant error messages or stack traces
+      render: text
+
+  - type: textarea
+    id: config
+    attributes:
+      label: Relevant configuration
+      description: Include configuration files if they may be related
+      render: yaml
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Screenshots, workarounds, or anything else that might help
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues and this is not a duplicate
+          required: true
+        - label: I can reproduce this bug consistently
+        - label: I have read the project README and followed setup instructions

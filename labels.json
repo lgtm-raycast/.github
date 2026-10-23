@@ -1,0 +1,147 @@
+[
+  {
+    "name": "ai",
+    "color": "7B61FF",
+    "description": "AI-powered features"
+  },
+  {
+    "name": "automation",
+    "color": "ededed",
+    "description": "Bot-opened issues and automated workflows"
+  },
+  {
+    "name": "blocked",
+    "color": "B60205",
+    "description": "Blocked on another issue or epic; see the latest comment"
+  },
+  {
+    "name": "bug",
+    "color": "d73a4a",
+    "description": "Something isn't working"
+  },
+  {
+    "name": "ci",
+    "color": "0e8a16",
+    "description": "CI/CD and workflows"
+  },
+  {
+    "name": "deferred",
+    "color": "8B949E",
+    "description": "Deliberately deferred; see the latest comment for why and what would revive it"
+  },
+  {
+    "name": "dependencies",
+    "color": "0366d6",
+    "description": "Dependency updates"
+  },
+  {
+    "name": "documentation",
+    "color": "0075ca",
+    "description": "Improvements or additions to documentation"
+  },
+  {
+    "name": "duplicate",
+    "color": "cfd3d7",
+    "description": "This issue or pull request already exists"
+  },
+  {
+    "name": "enhancement",
+    "color": "a2eeef",
+    "description": "New feature or request"
+  },
+  {
+    "name": "epic",
+    "color": "5319e7",
+    "description": "Parent issue tracking sub-issues"
+  },
+  {
+    "name": "good first issue",
+    "color": "7057ff",
+    "description": "Good for newcomers"
+  },
+  {
+    "name": "help wanted",
+    "color": "008672",
+    "description": "Extra attention is needed"
+  },
+  {
+    "name": "infrastructure",
+    "color": "0052cc",
+    "description": "Infrastructure and DevOps"
+  },
+  {
+    "name": "invalid",
+    "color": "e4e669",
+    "description": "This doesn't seem right"
+  },
+  {
+    "name": "maintenance",
+    "color": "bfdadc",
+    "description": "Maintenance, refactoring, and housekeeping"
+  },
+  {
+    "name": "needs-triage",
+    "color": "BFD4F2",
+    "description": "Needs maintainer triage"
+  },
+  {
+    "name": "performance",
+    "color": "FFA500",
+    "description": "Performance benchmarking and optimization"
+  },
+  {
+    "name": "prio:critical",
+    "color": "b60205",
+    "description": "Critical priority: fix immediately"
+  },
+  {
+    "name": "prio:high",
+    "color": "ff7619",
+    "description": "High priority"
+  },
+  {
+    "name": "prio:low",
+    "color": "c2e0c6",
+    "description": "Low priority"
+  },
+  {
+    "name": "prio:medium",
+    "color": "fef2c0",
+    "description": "Medium priority"
+  },
+  {
+    "name": "question",
+    "color": "d876e3",
+    "description": "Further information is requested"
+  },
+  {
+    "name": "release",
+    "color": "6f42c1",
+    "description": "Release management and versioning"
+  },
+  {
+    "name": "release-bump",
+    "color": "d4c5f9",
+    "description": "Automated version bump"
+  },
+  {
+    "name": "research",
+    "color": "c5def5",
+    "description": "Research, spikes, and investigations"
+  },
+  {
+    "name": "security",
+    "color": "ee0701",
+    "description": "Security-related changes"
+  },
+  {
+    "name": "testing",
+    "color": "FBCA04",
+    "description": "Testing infrastructure and test coverage"
+  },
+  {
+    "name": "wontfix",
+    "color": "ffffff",
+    "description": "This will not be worked on"
+  }
+]

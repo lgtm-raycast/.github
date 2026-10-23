@@ -1,0 +1,28 @@
+---
+name: LGTM Raycast issue metadata
+description: Synchronize shared labels and ensure additive owner assignment and issue labeling.
+inputs:
+  token:
+    description: Caller-scoped token with issues write permission
+    required: false
+    default: ${{ github.token }}
+  issue-number:
+    description: Issue to reconcile; zero skips an individual issue
+    default: "0"
+  reconcile-all:
+    description: Reconcile every issue, including closed and bot-created issues
+    default: "false"
+  sync-labels:
+    description: Synchronize the canonical label catalog
+    default: "true"
+runs:
+  using: composite
+  steps:
+    - name: Apply shared issue metadata
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+        LGTM_ISSUE_NUMBER: ${{ inputs.issue-number }}
+        LGTM_RECONCILE_ALL: ${{ inputs.reconcile-all }}
+        LGTM_SYNC_LABELS: ${{ inputs.sync-labels }}
+      run: python3 "${GITHUB_ACTION_PATH}/../../scripts/github/metadata.py"
