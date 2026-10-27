@@ -17,4 +17,5 @@ jobs:
       contents: read
       statuses: read
     with:
+      egress-policy: audit # TEMP: lgtm-hq/lgtm-ci#1207
       runner-image: ubuntu-26.04
