@@ -48,6 +48,7 @@ jobs:
       contents: read
       pull-requests: write
     with:
+      egress-policy: audit # TEMP: lgtm-hq/lgtm-ci#1207
       runner-image: ubuntu-26.04
       exit-code: ${{ needs.quality.outputs.exit-code }}
   security:
@@ -56,6 +57,7 @@ jobs:
       contents: read
       packages: read
     with:
+      egress-policy: audit # TEMP: lgtm-hq/lgtm-ci#1207
       runner-image: ubuntu-26.04
       job-name: Security audit
   publish-security-summary:
@@ -70,16 +72,20 @@ jobs:
       contents: read
       pull-requests: write
     with:
+      egress-policy: audit # TEMP: lgtm-hq/lgtm-ci#1207
       runner-image: ubuntu-26.04
   pinning:
     uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-validate-action-pinning.yml@9ea778eb4e6b876d60b7b3d7d0d0aee5182717bb # v0.78.0
     permissions:
       contents: read
     with:
+      egress-policy: audit # TEMP: lgtm-hq/lgtm-ci#1207
       runner-image: ubuntu-26.04
   title:
     if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
     uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-semantic-pr-title.yml@9ea778eb4e6b876d60b7b3d7d0d0aee5182717bb # v0.78.0
+    with:
+      egress-policy: audit # TEMP: lgtm-hq/lgtm-ci#1207
     permissions:
       contents: read
       pull-requests: write

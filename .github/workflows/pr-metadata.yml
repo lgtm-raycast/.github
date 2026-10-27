@@ -9,6 +9,8 @@ jobs:
   # runner-image support awaits the release of lgtm-hq/lgtm-ci#1204.
   label:
     uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-pr-labeler.yml@9ea778eb4e6b876d60b7b3d7d0d0aee5182717bb # v0.78.0
+    with:
+      egress-policy: audit # TEMP: lgtm-hq/lgtm-ci#1207
     permissions:
       contents: read
       pull-requests: write
@@ -19,4 +21,5 @@ jobs:
       contents: read
       pull-requests: write
     with:
+      egress-policy: audit # TEMP: lgtm-hq/lgtm-ci#1207
       runner-image: ubuntu-26.04
