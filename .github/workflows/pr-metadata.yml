@@ -8,7 +8,7 @@ permissions: {}
 jobs:
   # runner-image support awaits the release of lgtm-hq/lgtm-ci#1204.
   label:
-    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-pr-labeler.yml@9ea778eb4e6b876d60b7b3d7d0d0aee5182717bb # v0.78.0
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-pr-labeler.yml@2097a900753e3e5ad0e336483501b278e99855ae # v0.78.1
     with:
       egress-policy: audit # TEMP: lgtm-hq/lgtm-ci#1207
     permissions:
@@ -16,7 +16,7 @@ jobs:
       pull-requests: write
   assign:
     if: github.event.action == 'opened'
-    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-pr-auto-assign.yml@9ea778eb4e6b876d60b7b3d7d0d0aee5182717bb # v0.78.0
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-pr-auto-assign.yml@2097a900753e3e5ad0e336483501b278e99855ae # v0.78.1
     permissions:
       contents: read
       pull-requests: write
