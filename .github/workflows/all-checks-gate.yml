@@ -10,12 +10,12 @@ concurrency:
   cancel-in-progress: true
 jobs:
   gate:
-    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-all-checks-gate.yml@2097a900753e3e5ad0e336483501b278e99855ae # v0.78.1
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-all-checks-gate.yml@8f0fd9339df5d30a529aa572ceb51345b8be33a0 # v0.79.2
     permissions:
       actions: read
       checks: read
       contents: read
       statuses: read
     with:
-      egress-policy: audit # TEMP: lgtm-hq/lgtm-ci#1207
+      egress-policy: block
       runner-image: ubuntu-26.04

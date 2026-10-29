@@ -11,7 +11,7 @@ jobs:
   ai-review:
     if: >-
       github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.draft == false
-    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-ai-review.yml@2097a900753e3e5ad0e336483501b278e99855ae # v0.78.1
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-ai-review.yml@8f0fd9339df5d30a529aa572ceb51345b8be33a0 # v0.79.2
     permissions:
       contents: read
       pull-requests: read
@@ -21,7 +21,7 @@ jobs:
       LINTRO_REVIEW_APP_PRIVATE_KEY: ${{ secrets.LINTRO_REVIEW_APP_PRIVATE_KEY }}
       CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
     with:
-      egress-policy: audit # TEMP: lgtm-hq/lgtm-ci#1207
+      egress-policy: block
       runner-image: ubuntu-26.04
       provider: anthropic
       transport: cli
