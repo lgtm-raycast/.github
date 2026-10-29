@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   quality:
-    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-quality-lint.yml@2097a900753e3e5ad0e336483501b278e99855ae # v0.78.1
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-quality-lint.yml@8f0fd9339df5d30a529aa572ceb51345b8be33a0 # v0.79.2
     permissions:
       contents: read
       packages: read
@@ -23,7 +23,7 @@ jobs:
       egress-policy: audit # TEMP: lgtm-hq/lgtm-ci#1207
       egress-preset: quality
   tests:
-    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-test-python.yml@2097a900753e3e5ad0e336483501b278e99855ae # v0.78.1
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-test-python.yml@8f0fd9339df5d30a529aa572ceb51345b8be33a0 # v0.79.2
     permissions:
       actions: read
       contents: read
@@ -43,7 +43,7 @@ jobs:
     if: >-
       !cancelled() && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name ==
       github.repository
-    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-publish-quality-summary.yml@2097a900753e3e5ad0e336483501b278e99855ae # v0.78.1
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-publish-quality-summary.yml@8f0fd9339df5d30a529aa572ceb51345b8be33a0 # v0.79.2
     permissions:
       contents: read
       pull-requests: write
@@ -52,7 +52,7 @@ jobs:
       runner-image: ubuntu-26.04
       exit-code: ${{ needs.quality.outputs.exit-code }}
   security:
-    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-security-audit.yml@2097a900753e3e5ad0e336483501b278e99855ae # v0.78.1
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-security-audit.yml@8f0fd9339df5d30a529aa572ceb51345b8be33a0 # v0.79.2
     permissions:
       contents: read
       packages: read
@@ -67,7 +67,7 @@ jobs:
       github.repository
     # The pinning validator requires the version beside this indivisible SHA reference.
     # yamllint disable-line rule:line-length
-    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-publish-security-audit-comment.yml@2097a900753e3e5ad0e336483501b278e99855ae # v0.78.1
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-publish-security-audit-comment.yml@8f0fd9339df5d30a529aa572ceb51345b8be33a0 # v0.79.2
     permissions:
       contents: read
       pull-requests: write
@@ -75,7 +75,7 @@ jobs:
       egress-policy: audit # TEMP: lgtm-hq/lgtm-ci#1207
       runner-image: ubuntu-26.04
   pinning:
-    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-validate-action-pinning.yml@2097a900753e3e5ad0e336483501b278e99855ae # v0.78.1
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-validate-action-pinning.yml@8f0fd9339df5d30a529aa572ceb51345b8be33a0 # v0.79.2
     permissions:
       contents: read
     with:
@@ -83,7 +83,7 @@ jobs:
       runner-image: ubuntu-26.04
   title:
     if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
-    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-semantic-pr-title.yml@2097a900753e3e5ad0e336483501b278e99855ae # v0.78.1
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-semantic-pr-title.yml@8f0fd9339df5d30a529aa572ceb51345b8be33a0 # v0.79.2
     with:
       egress-policy: audit # TEMP: lgtm-hq/lgtm-ci#1207
     permissions:
