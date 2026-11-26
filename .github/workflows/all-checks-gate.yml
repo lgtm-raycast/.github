@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   gate:
-    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-all-checks-gate.yml@8f0fd9339df5d30a529aa572ceb51345b8be33a0 # v0.79.2
+    uses: lgtm-hq/lgtm-ci/.github/workflows/reusable-all-checks-gate.yml@d9e2ca3a4a7646bf7b4a810567db65a781267ce6 # v0.116.5
     permissions:
       actions: read
       checks: read
